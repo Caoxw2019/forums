@@ -25,13 +25,13 @@ public class QuestionService {
 
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = quesstionMapper.count();
+        Integer totalCount = quesstionMapper.countByUserId(userId);
         paginationDTO.setPagination(totalCount,page,size);
 
 
         //size*(page-1)
         Integer offset=size*(page-1);
-        List<Question> questions = quesstionMapper.list(userId,offset,size);
+        List<Question> questions = quesstionMapper.listByUserId(userId,offset,size);
         List<QuestionDTO> questionDTOList=new ArrayList<>();
 
 
