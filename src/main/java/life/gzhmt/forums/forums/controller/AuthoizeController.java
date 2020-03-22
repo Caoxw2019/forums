@@ -6,6 +6,7 @@ import life.gzhmt.forums.forums.dto.GithubUser;
 import life.gzhmt.forums.forums.mapper.UserMapper;
 import life.gzhmt.forums.forums.model.User;
 import life.gzhmt.forums.forums.provider.GithubProvider;
+import life.gzhmt.forums.forums.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class AuthoizeController {
     @Value("${github.redirect.url}")
     private String redirectUri;
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
 
     @GetMapping("/callback")
@@ -53,16 +54,15 @@ public class AuthoizeController {
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githubUser.getName());
-            user.setAccoutId(String.valueOf(githubUser.getId()));
+            user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             response.addCookie(new Cookie("token",token));
 
             //登录成功 写入cookie和session
             request.getSession().setAttribute("user",githubUser);
-            System.out.println(githubUser.getName());
             return  "redirect:/";
 
         }else {
@@ -72,4 +72,18 @@ public class AuthoizeController {
 
         }
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie=new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+
+
+
+
+    }
+
 }

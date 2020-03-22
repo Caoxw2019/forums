@@ -3,7 +3,7 @@ package life.gzhmt.forums.forums.model;
 public class User {
     private  Integer id;
     private  String name;
-    private  String accoutId;
+    private  String accountId;
     private  String token;
     private  Long gmtCreate;
     private  Long gmtModified;
@@ -34,12 +34,12 @@ public class User {
     }
 
 
-    public String getAccoutId() {
-        return accoutId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setAccoutId(String accoutId) {
-        this.accoutId = accoutId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getToken() {
