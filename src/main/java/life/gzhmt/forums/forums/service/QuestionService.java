@@ -94,4 +94,8 @@ public class QuestionService {
 
 
     }
+
+    public void incView(Integer id) {
+     quesstionMapper.updateByView(id);
+    }
 }

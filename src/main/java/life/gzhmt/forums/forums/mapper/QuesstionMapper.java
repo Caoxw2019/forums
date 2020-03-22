@@ -2,10 +2,7 @@ package life.gzhmt.forums.forums.mapper;
 
 import life.gzhmt.forums.forums.dto.QuestionDTO;
 import life.gzhmt.forums.forums.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,4 +22,6 @@ public interface QuesstionMapper {
     Integer countByUserId(@Param(value = "userId") Integer userId);
     @Select("select * from question where id=#{id}")
     Question getById(@Param(value = "id") Integer id);
+    @Update("update question set view_count=view_count+1 where id=#{id}")
+    void updateByView(@Param(value = "id") Integer id);
 }
