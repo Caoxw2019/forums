@@ -4,7 +4,7 @@ public class Comment {
     private Long id;
     private Long parentId;
     private Integer type;
-    private Integer commentator;
+    private Long commentator;
     private String content;
     private Long gmtCreate;
 
@@ -15,6 +15,11 @@ public class Comment {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
+    private Integer likeCount;
+    private Long gmtModified;
+
+
 
     public Long getId() {
         return id;
@@ -34,11 +39,11 @@ public class Comment {
         this.type = type;
     }
 
-    public Integer getCommentator() {
+    public Long getCommentator() {
         return commentator;
     }
 
-    public void setCommentator(Integer commentator) {
+    public void setCommentator(Long commentator) {
         this.commentator = commentator;
     }
 
@@ -74,8 +79,7 @@ public class Comment {
         this.gmtModified = gmtModified;
     }
 
-    private Integer likeCount;
-    private Long gmtModified;
+
 
 
 }
