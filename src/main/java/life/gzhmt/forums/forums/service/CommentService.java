@@ -13,14 +13,14 @@ public class CommentService {
     private CommentMapper commentMapper;
     @Autowired
     private QuesstionMapper quesstionMapper;
-    @Transactional
+ //   @Transactional
     public void insert(Comment comment) {
         //暂时实现简答回复 日后实现回复数增加
 
-        if (comment.getParentId()==null||comment.getParentId()==0){
+       if (comment.getParentId()==null||comment.getParentId()==0){
             return;
         }
-        quesstionMapper.updateByComment(comment.getParentId().intValue());
+        quesstionMapper.updateByComment(comment.getParentId());
         commentMapper.insert(comment);
 
 

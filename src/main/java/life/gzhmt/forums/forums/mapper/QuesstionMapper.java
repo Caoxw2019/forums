@@ -24,6 +24,6 @@ public interface QuesstionMapper {
     Question getById(@Param(value = "id") Integer id);
     @Update("update question set view_count=view_count+1 where id=#{id}")
     void updateByView(@Param(value = "id") Integer id);
-    @Update("update question set content=content+1 where id=#{id}")
-    void updateByComment(@Param(value = "id") Integer id);
+    @Update("update question set COMMENT_COUNT=COMMENT_COUNT+1 where id=#{id}")
+    void updateByComment(@Param(value = "id") Long id);
 }

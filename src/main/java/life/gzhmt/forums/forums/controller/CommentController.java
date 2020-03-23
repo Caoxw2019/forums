@@ -35,7 +35,7 @@ public class CommentController {
 
 
         Comment comment = new Comment();
-        comment.setParentId(1L);
+        comment.setParentId(commentDTO.getParentId());
         comment.setContent(commentDTO.getContent());
         comment.setType(commentDTO.getType());
         comment.setGmtModified(System.currentTimeMillis());

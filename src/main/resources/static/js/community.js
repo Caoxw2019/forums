@@ -26,12 +26,16 @@ function comment2target(targetId, type, content) {
         url: "/comment",
         contentType: 'application/json',
         data: JSON.stringify({
-            "test":targetId,
             "parentId": targetId,
             "content": content,
             "type": type
         }),
         success: function (response) {
+            if (response.code==200){
+                $("comment_section").hide();
+            } else {
+                alert("服务器异常");
+            }
             console.log(response);
         },
         dataType: "json"

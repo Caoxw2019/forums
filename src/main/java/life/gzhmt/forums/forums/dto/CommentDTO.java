@@ -1,16 +1,16 @@
 package life.gzhmt.forums.forums.dto;
 
 public class CommentDTO {
-    private  Long parenId;
+    private  Long parentId;
     private  String content;
     private  Integer type;
 
-    public Long getParenId() {
-        return parenId;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setParenId(Long parenId) {
-        this.parenId = parenId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getContent() {
