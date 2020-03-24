@@ -31,12 +31,11 @@ function comment2target(targetId, type, content) {
             "type": type
         }),
         success: function (response) {
-            if (response.code==200){
-                $("comment_section").hide();
-            } else {
-                alert("服务器异常");
+            if(response.code==200){
+                $("#comment_section").hide();
             }
-            console.log(response);
+
+            alert(response.message);
         },
         dataType: "json"
     });

@@ -1,6 +1,6 @@
 package life.gzhmt.forums.forums.controller;
 
-import life.gzhmt.forums.forums.dto.CommentDTO;
+import life.gzhmt.forums.forums.dto.CommentCreateDTO;
 import life.gzhmt.forums.forums.dto.ResultDTO;
 import life.gzhmt.forums.forums.model.Comment;
 import life.gzhmt.forums.forums.model.User;
@@ -22,7 +22,7 @@ public class CommentController {
 
     @ResponseBody
     @RequestMapping(value = "/comment",method= RequestMethod.POST)
-    public Object post(@RequestBody CommentDTO commentDTO,
+    public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
                        HttpServletRequest request){
        User user = (User)request.getSession().getAttribute("user");
        if (user==null){
@@ -35,13 +35,14 @@ public class CommentController {
 
 
         Comment comment = new Comment();
-        comment.setParentId(commentDTO.getParentId());
-        comment.setContent(commentDTO.getContent());
-        comment.setType(commentDTO.getType());
+        comment.setParentId(commentCreateDTO.getParentId());
+        comment.setContent(commentCreateDTO.getContent());
+        comment.setType(commentCreateDTO.getType());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setCommentator((long)user.getId());
         comment.setLikeCount(0);
+        //下面这行存在BUG 完成在修
         commentService.insert(comment);
         //Map<Object,Object> objectObjectMap=new HashMap<>();
         //objectObjectMap.put("message","成功");

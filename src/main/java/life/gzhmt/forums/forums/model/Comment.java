@@ -7,6 +7,10 @@ public class Comment {
     private Long commentator;
     private String content;
     private Long gmtCreate;
+    private Integer likeCount;
+    private Long gmtModified;
+
+
 
     public Long getParentId() {
         return parentId;
@@ -16,8 +20,6 @@ public class Comment {
         this.parentId = parentId;
     }
 
-    private Integer likeCount;
-    private Long gmtModified;
 
 
 
