@@ -26,4 +26,7 @@ public interface QuesstionMapper {
     void updateByView(@Param(value = "id") Integer id);
     @Update("update question set COMMENT_COUNT=COMMENT_COUNT+1 where id=#{id}")
     void updateByComment(@Param(value = "id") Long id);
+    //这条语句用于显示最近回复的问题列表
+    @Select("select * from question where creator=#{userId}")
+    List<Question> listById(@Param(value = "userId") Integer userId);
 }

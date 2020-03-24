@@ -6,53 +6,20 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js"></script>
+    <script src="/js/editormd.min.js" type="application/javascript"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
+
 
 
 </head>
 <body>
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">广航水友社区</span>
-            </button>
-            <a class="navbar-brand" href="/">水友社区</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索话题">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user!=null}">
-                    <a href="/publish">发布</a>
-                </li>
-                <li class="dropdown" th:if="${session.user != null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">
-                        <span th:text="${session.user.getName()}"></span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/profile/questions">我的帖子</a></li>
-                        <li><a href="/logout">退出登录</a></li>
-                    </ul>
-                </li>
-                <li th:if="${session.user == null}">
-                    <a href="https://github.com/login/oauth/authorize?client_id=7c6566bb77526da2203e&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
-                </li>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <div th:insert="~{navigation :: nav}"></div>
     <div class="container-fluid main">
         <div class="row">
             <div class="col-lg-9 	col-md-12 col-sm-12 col-xs-12">
@@ -66,9 +33,14 @@
             </span>
                 <hr>
                 <!--正文-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                     th:text="${question.description}">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                    <textarea style="display:none;" th:text="${question.description}"></textarea>
                 </div>
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
                 <hr><hr>
                 <!--这里ID方便JS取到值-->
                 <input type="hidden" id="question_id" th:value="${question.id}">

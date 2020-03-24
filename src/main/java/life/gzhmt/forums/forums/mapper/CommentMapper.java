@@ -11,7 +11,8 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
     @Insert("insert into comment(parent_id,type,commentator,gmt_create,gmt_modified,like_count,content) values(#{parentId},#{type},{#commentator},{#gmtCreate},{#gmtModified},{#likeCount},{#content})")
-    void insert(Comment comment);
-    @Select("select * from comment where parent_id=#{id} order by GMT_CREATE")
+    void create(Comment comment);
+    @Select("select * from comment where parent_id=#{id} order by GMT_CREATE DESC")
     List<Comment> listSelectByParentid(@Param(value = "id") Integer id);
+
 }

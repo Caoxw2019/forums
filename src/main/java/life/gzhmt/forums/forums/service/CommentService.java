@@ -32,7 +32,7 @@ public class CommentService {
             return;
         }
         quesstionMapper.updateByComment(comment.getParentId());
-      //  commentMapper.insert(comment);
+        commentMapper.create(comment);
 
 
     }

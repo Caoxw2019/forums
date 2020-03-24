@@ -2,6 +2,7 @@ package life.gzhmt.forums.forums.service;
 
 
 import life.gzhmt.forums.forums.dto.PaginationDTO;
+import life.gzhmt.forums.forums.mapper.CommentMapper;
 import life.gzhmt.forums.forums.mapper.QuesstionMapper;
 import life.gzhmt.forums.forums.mapper.UserMapper;
 import life.gzhmt.forums.forums.model.Question;
@@ -22,6 +23,8 @@ public class QuestionService {
     private QuesstionMapper quesstionMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -97,5 +100,34 @@ public class QuestionService {
 
     public void incView(Integer id) {
      quesstionMapper.updateByView(id);
+    }
+
+    public PaginationDTO listRelies(Integer userId, Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = quesstionMapper.countByUserId(userId);
+        paginationDTO.setPagination(totalCount,page,size);
+
+
+        //size*(page-1)
+       // Integer offset=size*(page-1);
+        List<Question> questions = quesstionMapper.listById(userId);
+        List<QuestionDTO> questionDTOList=new ArrayList<>();
+
+
+        for (Question question:questions){
+            User user= userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+            //下面循环求出问题的回复
+          //  commentMapper.findByParentid(question.getId());
+        }
+        paginationDTO.setQuestion(questionDTOList);
+
+
+
+
+        return paginationDTO;
     }
 }

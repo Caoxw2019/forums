@@ -7,10 +7,20 @@ public class PaginationDTO {
 
 
     public List<QuestionDTO> question;
+    public List<CommentDTO> comment;
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;
     private boolean showEndPage;
+
+    public List<CommentDTO> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<CommentDTO> comment) {
+        this.comment = comment;
+    }
+
 
 
     private  Integer page;
