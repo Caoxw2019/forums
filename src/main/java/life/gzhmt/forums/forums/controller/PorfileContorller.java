@@ -35,13 +35,14 @@ public class PorfileContorller {
             model.addAttribute("sectionName", "我的帖子");
             PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
             model.addAttribute("pagination",paginationDTO);
+            return "profile";
         } else if ("replies".equals(action)) {
-            PaginationDTO paginationDTO = questionService.listRelies(user.getId(), page, size);
+            PaginationDTO paginationDTO = questionService.listRelies(user.getId());
             model.addAttribute("section", "replies");
             model.addAttribute("pagination", paginationDTO);
             model.addAttribute("sectionName", "最新回复");
-
+            return "replies";
         }
-        return "profile";
+        return null;
     }
 }

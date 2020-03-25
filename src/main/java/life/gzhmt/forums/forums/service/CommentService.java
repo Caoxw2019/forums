@@ -45,7 +45,8 @@ public class CommentService {
             return new ArrayList<>();
         }
         for (Comment comment:comments){
-            User user= userMapper.findById(comment.getParentId().intValue());
+            int id1 = comment.getCommentator().intValue();
+            User user= userMapper.findById(id1);
             CommentDTO commentDTO = new CommentDTO();
             BeanUtils.copyProperties(comment,commentDTO);
             commentDTO.setUser(user);

@@ -14,5 +14,6 @@ public interface CommentMapper {
     void create(Comment comment);
     @Select("select * from comment where parent_id=#{id} order by GMT_CREATE DESC")
     List<Comment> listSelectByParentid(@Param(value = "id") Integer id);
-
+    @Select("select * from COMMENT,QUESTION,USER where  USER.ID=#{id} and COMMENT.PARENT_ID=QUESTION.ID and USER.ID=QUESTION.CREATOR;")
+    List<Comment> listCommentByUserid(@Param(value = "id") Integer userId);
 }

@@ -1,10 +1,12 @@
 package life.gzhmt.forums.forums.service;
 
 
+import life.gzhmt.forums.forums.dto.CommentDTO;
 import life.gzhmt.forums.forums.dto.PaginationDTO;
 import life.gzhmt.forums.forums.mapper.CommentMapper;
 import life.gzhmt.forums.forums.mapper.QuesstionMapper;
 import life.gzhmt.forums.forums.mapper.UserMapper;
+import life.gzhmt.forums.forums.model.Comment;
 import life.gzhmt.forums.forums.model.Question;
 import life.gzhmt.forums.forums.model.User;
 import life.gzhmt.forums.forums.dto.QuestionDTO;
@@ -102,28 +104,27 @@ public class QuestionService {
      quesstionMapper.updateByView(id);
     }
 
-    public PaginationDTO listRelies(Integer userId, Integer page, Integer size) {
+    public PaginationDTO listRelies(Integer userId) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = quesstionMapper.countByUserId(userId);
-        paginationDTO.setPagination(totalCount,page,size);
+       // Integer totalCount = quesstionMapper.countByUserId(userId);
+        //paginationDTO.setPagination(totalCount,page,size);
 
 
         //size*(page-1)
        // Integer offset=size*(page-1);
-        List<Question> questions = quesstionMapper.listById(userId);
-        List<QuestionDTO> questionDTOList=new ArrayList<>();
+       // List<Question> questions = quesstionMapper.listById(userId);
+        List<Comment> comments = commentMapper.listCommentByUserid(userId);
+        List<CommentDTO> commentDTOList=new ArrayList<>();
 
 
-        for (Question question:questions){
-            User user= userMapper.findById(question.getCreator());
-            QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(question,questionDTO);
-            questionDTO.setUser(user);
-            questionDTOList.add(questionDTO);
-            //下面循环求出问题的回复
-          //  commentMapper.findByParentid(question.getId());
+        for (Comment comment:comments){
+            User user= userMapper.findById(comment.getCommentator().intValue());
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment,commentDTO);
+            commentDTO.setUser(user);
+            commentDTOList.add(commentDTO);
         }
-        paginationDTO.setQuestion(questionDTOList);
+        paginationDTO.setComment(commentDTOList);
 
 
 
