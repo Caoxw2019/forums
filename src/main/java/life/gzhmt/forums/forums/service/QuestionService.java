@@ -104,31 +104,5 @@ public class QuestionService {
      quesstionMapper.updateByView(id);
     }
 
-    public PaginationDTO listRelies(Integer userId) {
-        PaginationDTO paginationDTO = new PaginationDTO();
-       // Integer totalCount = quesstionMapper.countByUserId(userId);
-        //paginationDTO.setPagination(totalCount,page,size);
 
-
-        //size*(page-1)
-       // Integer offset=size*(page-1);
-       // List<Question> questions = quesstionMapper.listById(userId);
-        List<Comment> comments = commentMapper.listCommentByUserid(userId);
-        List<CommentDTO> commentDTOList=new ArrayList<>();
-
-
-        for (Comment comment:comments){
-            User user= userMapper.findById(comment.getCommentator().intValue());
-            CommentDTO commentDTO = new CommentDTO();
-            BeanUtils.copyProperties(comment,commentDTO);
-            commentDTO.setUser(user);
-            commentDTOList.add(commentDTO);
-        }
-        paginationDTO.setComment(commentDTOList);
-
-
-
-
-        return paginationDTO;
-    }
 }

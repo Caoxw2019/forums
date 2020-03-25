@@ -1,6 +1,7 @@
 package life.gzhmt.forums.forums.service;
 
 import life.gzhmt.forums.forums.dto.CommentDTO;
+import life.gzhmt.forums.forums.dto.PaginationDTO;
 import life.gzhmt.forums.forums.mapper.CommentMapper;
 import life.gzhmt.forums.forums.mapper.QuesstionMapper;
 import life.gzhmt.forums.forums.mapper.UserMapper;
@@ -57,5 +58,25 @@ public class CommentService {
 
 
 
+    }
+    public PaginationDTO listRelies(Integer userId) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        List<Comment> comments = commentMapper.listCommentByUserid(userId);
+        List<CommentDTO> commentDTOList=new ArrayList<>();
+
+
+        for (Comment comment:comments){
+            User user= userMapper.findById(comment.getCommentator().intValue());
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment,commentDTO);
+            commentDTO.setUser(user);
+            commentDTOList.add(commentDTO);
+        }
+        paginationDTO.setComment(commentDTOList);
+
+
+
+
+        return paginationDTO;
     }
 }

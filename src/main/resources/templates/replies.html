@@ -16,7 +16,7 @@
     <div th:insert="~{navigation :: nav}"></div>
     <div class="container-fluid main">
         <div class="row">
-            <div class="col-lg-9 	col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <h2> <span th:text="${sectionName}"></span></h2>
                 <hr>
                 <!--这里是评论的显示-->
@@ -27,9 +27,14 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <div th:text="${comment.user.name}"></div>回复了你的问题
-                        <h4 class="media-heading">
-                            <a th:href="@{'/question/'}" th:text="${comment.content}"></a>
+                        <h4>
+                        <div th:text="${comment.user.name}"></div>
+                        </h4>
+                        <h5>
+                            回复了你的问题
+                        </h5>
+                        <h4>
+                            <a th:href="@{'/question/'+ ${comment.parentId}}" th:text="${comment.content}"></a>
                         </h4>
                     </div>
                 </div>

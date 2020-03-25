@@ -3,6 +3,7 @@ package life.gzhmt.forums.forums.controller;
 
 import life.gzhmt.forums.forums.dto.PaginationDTO;
 import life.gzhmt.forums.forums.model.User;
+import life.gzhmt.forums.forums.service.CommentService;
 import life.gzhmt.forums.forums.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 public class PorfileContorller {
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/profile/{action}")
     public String profile(HttpServletRequest request,
@@ -37,7 +40,7 @@ public class PorfileContorller {
             model.addAttribute("pagination",paginationDTO);
             return "profile";
         } else if ("replies".equals(action)) {
-            PaginationDTO paginationDTO = questionService.listRelies(user.getId());
+            PaginationDTO paginationDTO = commentService.listRelies(user.getId());
             model.addAttribute("section", "replies");
             model.addAttribute("pagination", paginationDTO);
             model.addAttribute("sectionName", "最新回复");
