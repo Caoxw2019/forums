@@ -25,7 +25,7 @@ public class CommentService {
     private QuesstionMapper quesstionMapper;
     @Autowired
     private UserMapper userMapper;
- //   @Transactional
+    @Transactional
     public void insert(Comment comment) {
         //暂时实现简答回复 日后实现回复数增加
 

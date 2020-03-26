@@ -66,9 +66,7 @@
                                 </h5>
                                 <div th:text="${comment.content}"></div>
                                 <div class="menu">
-                                    <span class="glyphicon glyphicon-thumbs-up icon"></span>
-                                    <span th:data-id="${comment.id}"
-                                          onclick="collapseComments(this)" class="comment-icon">
+                                    <span class="glyphicon glyphicon-thumbs-up icon" th:text="${comment.likeCount}"></span>
                                 </span>
                                     <span class="pull-right"
                                           th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>

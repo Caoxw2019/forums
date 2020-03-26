@@ -31,8 +31,10 @@ public class QuestionController {
         List<CommentDTO> comments = commentService.listByQuestionId(id);
         //已读功能
         User user = (User)request.getSession().getAttribute("user");
-        if (user.getId()==questionDTO.getCreator()){
-            commentService.updateType(user.getId(),questionDTO.getId());
+        if(user!=null) {
+            if (user.getId() == questionDTO.getCreator()) {
+                commentService.updateType(user.getId(), questionDTO.getId());
+            }
         }
         //累加阅读数
         questionService.incView(id);

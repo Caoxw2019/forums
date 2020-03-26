@@ -7,9 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-    @Insert("insert into comment(parent_id,type,commentator,gmt_create,gmt_modified,like_count,content) values(#{parentId},#{type},{#commentator},{#gmtCreate},{#gmtModified},{#likeCount},{#content})")
+    @Insert("insert into Comment(PARENT_ID,TYPE,COMMENTATOR,GMT_CREATE,GMT_MODIFIED,LIKE_COUNT,CONTENT) values(#{parentId},#{type},#{commentator},#{gmtCreate},#{gmtModified},#{likeCount},#{content})")
     void create(Comment comment);
-    @Select("select * from comment where parent_id=#{id} order by GMT_CREATE DESC")
+    @Select("select * from comment where parent_id=#{id}")
     List<Comment> listSelectByParentid(@Param(value = "id") Integer id);
     @Select("select * from COMMENT,QUESTION,USER where  USER.ID=#{id} and COMMENT.PARENT_ID=QUESTION.ID and USER.ID=QUESTION.CREATOR order by GMT_CREATE DESC")
     List<Comment> listCommentByUserid(@Param(value = "id") Integer userId);
