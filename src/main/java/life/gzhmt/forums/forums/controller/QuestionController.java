@@ -32,7 +32,7 @@ public class QuestionController {
         //已读功能
         User user = (User)request.getSession().getAttribute("user");
         if(user!=null) {
-            if (user.getId() == questionDTO.getCreator()) {
+            if ((int)user.getId()==(int)questionDTO.getCreator()) {
                 commentService.updateType(user.getId(), questionDTO.getId());
             }
         }
