@@ -61,12 +61,9 @@
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <h3>热门帖子</h3>
                 <div class="media" th:each="question : ${hotQuestion.question}">
-
-                    <div class="media-body">
                         <h4 class="media-heading"  th:if="${question.viewCount>9}or${question.commentCount>3}">
                             <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
                         </h4>
-                    </div>
                 </div>
 
 

@@ -104,5 +104,29 @@ public class QuestionService {
      quesstionMapper.updateByView(id);
     }
 
+    //搜索返回List数据
+    public PaginationDTO listSearch(String search, Integer page, Integer size) {
+        search="'%"+search+"%'";
+        System.out.println(search);
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = quesstionMapper.countSearch(search);
+        paginationDTO.setPagination(totalCount,page,size);
 
+
+        //size*(page-1)
+        Integer offset=size*(page-1);
+        List<Question> questions = quesstionMapper.listSearch(search,offset,size);
+        List<QuestionDTO> questionDTOList=new ArrayList<>();
+
+
+        for (Question question:questions){
+            User user= userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        }
+        paginationDTO.setQuestion(questionDTOList);
+        return paginationDTO;
+    }
 }

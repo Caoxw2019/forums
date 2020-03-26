@@ -33,6 +33,7 @@ function comment2target(targetId, type, content) {
         success: function (response) {
             if(response.code==200){
                 $("#comment_section").hide();
+                window.location.reload();
             }
 
             alert(response.message);

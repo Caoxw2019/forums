@@ -25,11 +25,21 @@ public class IndexController {
     }*/
     public String index(Model model,
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
-                        @RequestParam(name = "size",defaultValue = "5") Integer size) {
-        PaginationDTO pagination=questionService.list(page,size);
-        PaginationDTO hotQuestion=questionService.list(1,10);
-        model.addAttribute("pagination",pagination);
+                        @RequestParam(name = "size",defaultValue = "5") Integer size,
+                        @RequestParam(name = "search", required = false) String search) {
+
+        PaginationDTO hotQuestion=questionService.list(1,200);
         model.addAttribute("hotQuestion",hotQuestion);
+        if (search==null||search.equals("")){
+            PaginationDTO pagination=questionService.list(page,size);
+            model.addAttribute("pagination",pagination);
+        }else if (search!=null){
+            PaginationDTO pagination=questionService.listSearch(search,page,size);
+            model.addAttribute("pagination",pagination);
+
+        }
+
+
         return "index";
 
     }

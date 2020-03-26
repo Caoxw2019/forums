@@ -6,7 +6,7 @@ public class ResultDTO {
     public static ResultDTO okOf() {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(200);
-        resultDTO.setMessage("请求成功");
+        resultDTO.setMessage("回复成功");
         return resultDTO;
     }
 
