@@ -43,7 +43,7 @@ public class CommentController {
         comment.setCommentator((long)user.getId());
         comment.setLikeCount(0);
         //下面这行存在BUG 完成在修
-       // commentService.insert(comment);
+        commentService.insert(comment);
         return ResultDTO.okOf();
 
 

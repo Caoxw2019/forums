@@ -25,8 +25,6 @@ public class QuestionService {
     private QuesstionMapper quesstionMapper;
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private CommentMapper commentMapper;
 
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -106,7 +104,7 @@ public class QuestionService {
 
     //搜索返回List数据
     public PaginationDTO listSearch(String search, Integer page, Integer size) {
-        search="'%"+search+"%'";
+        search="%"+search+"%";
         System.out.println(search);
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalCount = quesstionMapper.countSearch(search);
