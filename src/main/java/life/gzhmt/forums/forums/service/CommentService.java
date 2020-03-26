@@ -79,4 +79,16 @@ public class CommentService {
 
         return paginationDTO;
     }
+    public Integer countType(Integer userId){
+        Integer count=0;
+        count=commentMapper.countTypeByUserid(userId);
+
+
+
+        return count;
+    }
+
+    public void updateType(Integer userId, Integer questionId) {
+        commentMapper.updateType(userId,questionId);
+    }
 }

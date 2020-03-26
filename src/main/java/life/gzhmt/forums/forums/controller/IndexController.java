@@ -1,6 +1,7 @@
 package life.gzhmt.forums.forums.controller;
 
 import life.gzhmt.forums.forums.dto.PaginationDTO;
+import life.gzhmt.forums.forums.service.CommentService;
 import life.gzhmt.forums.forums.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class IndexController {
 
 
 
+
     @GetMapping("/")
    /* public String hello(@RequestParam(name = "name") String name, Model model){
       //  model.addAllAttributes("name",name);
@@ -27,9 +29,10 @@ public class IndexController {
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
                         @RequestParam(name = "size",defaultValue = "5") Integer size,
                         @RequestParam(name = "search", required = false) String search) {
-
+        //热门帖子
         PaginationDTO hotQuestion=questionService.list(1,200);
         model.addAttribute("hotQuestion",hotQuestion);
+        //判断是否有接受搜索值
         if (search==null||search.equals("")){
             PaginationDTO pagination=questionService.list(page,size);
             model.addAttribute("pagination",pagination);

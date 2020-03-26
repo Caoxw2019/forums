@@ -27,6 +27,7 @@
                         </a>
                     </div>
                     <div class="media-body">
+                        <span class="label label-danger" th:if="${comment.type == 1}">未读</span>
                         <h4>
                         <div th:text="${comment.user.name}"></div>
                         </h4>

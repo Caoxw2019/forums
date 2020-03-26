@@ -1,6 +1,7 @@
 package life.gzhmt.forums.forums.interceptor;
 import life.gzhmt.forums.forums.mapper.UserMapper;
 import life.gzhmt.forums.forums.model.User;
+import life.gzhmt.forums.forums.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.Nullable;
@@ -16,6 +17,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentService commentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -28,7 +31,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                     User user = userMapper.finByToken(token);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
-
+                        //下面是通知
+                        Integer countType=commentService.countType(user.getId());
+                        request.getSession().setAttribute("countType", countType);
                     }
                     break;
                 }
