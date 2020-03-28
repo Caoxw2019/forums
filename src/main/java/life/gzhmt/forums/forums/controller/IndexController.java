@@ -27,11 +27,11 @@ public class IndexController {
     }*/
     public String index(Model model,
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
-                        @RequestParam(name = "size",defaultValue = "5") Integer size,
+                        @RequestParam(name = "size",defaultValue = "10") Integer size,
                         @RequestParam(name = "search", required = false) String search) {
         //热门帖子
-        PaginationDTO hotQuestion=questionService.list(1,200);
-        model.addAttribute("hotQuestion",hotQuestion);
+        //PaginationDTO hotQuestion=questionService.list(1,200);
+       // model.addAttribute("hotQuestion",hotQuestion);
         //判断是否有接受搜索值
         if (search==null||search.equals("")){
             PaginationDTO pagination=questionService.list(page,size);
