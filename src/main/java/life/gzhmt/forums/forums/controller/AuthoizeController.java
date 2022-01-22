@@ -64,7 +64,6 @@ public class AuthoizeController {
             //登录成功 写入cookie和session
             request.getSession().setAttribute("user",githubUser);
             return  "redirect:/";
-
         }else {
             //登录失败
             System.out.println("登录失败");

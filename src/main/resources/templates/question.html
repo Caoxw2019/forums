@@ -66,7 +66,14 @@
                                 </h5>
                                 <div th:text="${comment.content}"></div>
                                 <div class="menu">
-                                    <span class="glyphicon glyphicon-thumbs-up icon" th:text="${comment.likeCount}"></span>
+                                    <script>
+                                        function addLike() {
+                                            $("#up").html("1").css("color","yellow");
+                                            alert("点赞了");
+
+                                        }
+                                    </script>
+                                    <span id="up" onclick="addLike()" class="glyphicon glyphicon-thumbs-up icon" th:text="${comment.likeCount}"></span>
                                 </span>
                                     <span class="pull-right"
                                           th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>

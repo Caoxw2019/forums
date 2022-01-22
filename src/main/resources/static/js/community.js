@@ -1,16 +1,9 @@
 /**
- * Created by codedrinker on 2019/6/1.
- */
-
-/**
  * 提交回复
  */
 function post() {
-
     var questionId = $("#question_id").val();
-    console.log(questionId);
     var content = $("#comment_content").val();
-    console.log(content);
     comment2target(questionId, 1, content);
 
 }
@@ -41,3 +34,4 @@ function comment2target(targetId, type, content) {
         dataType: "json"
     });
 }
+

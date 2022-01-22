@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CommentController {
     @Autowired
     private CommentService commentService;
-
-
     @ResponseBody
     @RequestMapping(value = "/comment",method= RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
@@ -29,11 +27,6 @@ public class CommentController {
            return ResultDTO.errorOf(2002,"未登录，不能评论");
 
        }
-
-
-
-
-
         Comment comment = new Comment();
         comment.setParentId(commentCreateDTO.getParentId());
         comment.setContent(commentCreateDTO.getContent());
@@ -42,10 +35,7 @@ public class CommentController {
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setCommentator((long)user.getId());
         comment.setLikeCount(0);
-        //下面这行存在BUG 完成在修
         commentService.insert(comment);
         return ResultDTO.okOf();
-
-
     }
 }

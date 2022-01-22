@@ -27,15 +27,11 @@ public class CommentService {
     private UserMapper userMapper;
     @Transactional
     public void insert(Comment comment) {
-        //暂时实现简答回复 日后实现回复数增加
-
        if (comment.getParentId()==null||comment.getParentId()==0){
             return;
         }
         quesstionMapper.updateByComment(comment.getParentId());
         commentMapper.create(comment);
-
-
     }
 
     public List<CommentDTO> listByQuestionId(Integer id) {
@@ -82,9 +78,6 @@ public class CommentService {
     public Integer countType(Integer userId){
         Integer count=0;
         count=commentMapper.countTypeByUserid(userId);
-
-
-
         return count;
     }
 
