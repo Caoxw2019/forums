@@ -23,7 +23,7 @@ public class GithubProvider {
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+·       try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
 
            String[] split = string.split("&");
