@@ -13,6 +13,7 @@ public class UserService {
 
     public void createOrUpdate(User user) {
             User dbUser=userMapper.findByAccountId(user.getAccountId());
+        System.out.println(user);
             if (dbUser==null){
                 userMapper.insert(user);
             }

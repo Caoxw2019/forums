@@ -48,8 +48,10 @@ public class AuthoizeController {
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
+        System.out.println(accessToken);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        if (githubUser != null&&githubUser.getId()!=null) {
+        System.out.println(githubUser.getId());
+        if (githubUser!=null&&githubUser.getId()!=null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -59,9 +61,9 @@ public class AuthoizeController {
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
             userService.createOrUpdate(user);
-            response.addCookie(new Cookie("token",token));
-
             //登录成功 写入cookie和session
+            System.out.println("登录成功2");
+            response.addCookie(new Cookie("token",token));
             request.getSession().setAttribute("user",githubUser);
             return  "redirect:/";
         }else {
