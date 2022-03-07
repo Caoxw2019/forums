@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>韶院水友社区</title>
+    <link rel="icon" href="images/logos/logo.png" >
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="css/community.css">
+
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
-
 
 </head>
 <body>
@@ -78,4 +79,49 @@
 </nav>
 <div th:insert="~{footer :: foot}"></div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var options = {
+        bottom: "52px",                 // default: '32px'
+        right: "52px",                  // default: '32px'
+        left: "unset",                  // default: 'unset'
+        time: "0s",                   // default: '0.3s'
+        mixColor: "#1",               // default: '#fff'
+        backgroundColor: "#1",        // default: '#fff'
+        buttonColorDark: "#262728",     // default: '#100f2c'
+        buttonColorLight: "#fff",       // default: '#fff'
+        saveInCookies: false,            // default: true,
+        label: "🌓",                    // default: ''
+        autoMatchOsTheme: true,         // default: true
+    };
+    let darkmode = new Darkmode(options);
+    darkmode.showWidget();
+
+    $("document").ready(function () {
+        if (darkmode.isActivated()) {
+            document.getElementById("light-mode").style.display = "none";
+            document.getElementById("dark-mode").style.display = "flex";
+        } else {
+            document.getElementById("light-mode").style.display = "flex";
+            document.getElementById("dark-mode").style.display = "none";
+        }
+    });
+
+    $(".darkmode-toggle").click(function () {
+        if (darkmode.isActivated()) {
+            document.getElementById("light-mode").style.display = "none";
+            document.getElementById("dark-mode").style.display = "flex";
+        } else {
+            document.getElementById("light-mode").style.display = "flex";
+            document.getElementById("dark-mode").style.display = "none";
+        }
+
+        }
+
+
+    );
+</script>
+
+
 </html>
